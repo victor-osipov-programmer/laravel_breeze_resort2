@@ -54,4 +54,9 @@ class User extends Authenticatable implements JWTSubject
     function getJWTCustomClaims() {
         return [];
     }
+
+
+    function room() {
+        return $this->hasOne(Room::class);
+    }
 }

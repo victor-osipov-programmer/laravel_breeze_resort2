@@ -14,15 +14,10 @@ class AuthController extends Controller
     {
         $data = request(['username', 'password']);
 
-
-        // if (! $token = auth()->attempt($credentials)) {
-        //     return response()->json(['error' => 'Unauthorized'], 401);
-        // }
         $user = User::where('username', $data['username'])->where('password', $data['password'])->first();
         if (!$user) {
             throw new Unauthorized('Unauthorized', ['login' => 'invalid credentials']);
         }
-        // dd(123);
 
         $token = JWTAuth::fromUser($user);
         Auth::login($user);

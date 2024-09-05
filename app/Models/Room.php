@@ -10,4 +10,9 @@ class Room extends Model
     use HasFactory;
 
     protected $guarded = false;
+
+
+    function users() {
+        return $this->belongsToMany(User::class);
+    }
 }
