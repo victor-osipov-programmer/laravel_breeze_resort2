@@ -13,6 +13,10 @@ class Room extends Model
 
 
     function users() {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class, 'room_id');
+    }
+
+    function hotel() {
+        return $this->belongsTo(Hotel::class, 'hotel_id');
     }
 }

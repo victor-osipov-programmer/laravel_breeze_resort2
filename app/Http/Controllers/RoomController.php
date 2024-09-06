@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Http\Resources\UsersInRoom;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 class RoomController extends Controller
@@ -66,5 +68,15 @@ class RoomController extends Controller
                 'message' => 'Deleted'
             ]
         ]);
+    }
+
+    public function getUsersInRooms()
+    {
+        Gate::authorize('viewAny', User::class);
+        Gate::authorize('viewAny', Room::class);
+
+        $rooms = Room::with('users')->get();
+
+        return UsersInRoom::collection($rooms);
     }
 }

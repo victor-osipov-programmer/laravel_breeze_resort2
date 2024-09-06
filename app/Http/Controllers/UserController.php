@@ -82,10 +82,5 @@ class UserController extends Controller
         ]);
     }
 
-    public function getUsersInRooms() {
-        Gate::authorize('viewAny', User::class);
-        Gate::authorize('viewAny', Room::class);
-
-        
-    }
+    
 }

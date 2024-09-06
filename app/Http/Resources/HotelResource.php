@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UsersInRoom extends JsonResource
+class HotelResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,9 +14,12 @@ class UsersInRoom extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $this->wrap('list');
+
         return [
+            'id' => $this->id,
             'name' => $this->name,
-            'userdata' => UserResource::collection($this->users)
+            'number' => $this->number
         ];
     }
 }
