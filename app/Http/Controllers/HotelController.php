@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateHotelRequest;
 use App\Http\Resources\HotelResource;
 use App\Http\Resources\UsersInRoomsInHotel;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 class HotelController extends Controller
@@ -82,6 +83,10 @@ class HotelController extends Controller
     }
     public function getUsersInRoomsInHotels()
     {
+        Gate::authorize('viewAny', User::class);
+        Gate::authorize('viewAny', Room::class);
+        Gate::authorize('viewAny', Hotel::class);
+        
         $hotels = Hotel::with('rooms.users')->get();
         return UsersInRoomsInHotel::collection($hotels);
     }
